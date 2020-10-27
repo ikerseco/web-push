@@ -8,8 +8,8 @@ const bodyParser = require('body-parser')
 
 const router = require('./routes/routes');
 
-//mysql//
-
+   
+//app.use
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
@@ -19,7 +19,6 @@ app.use(function (req, res, next) {
     next();
 })
 app.use(router)
-
 
 
 

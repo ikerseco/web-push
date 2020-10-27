@@ -1,16 +1,18 @@
 const webpush = require('web-push');
-var mysql      = require('mysql');
 const { json } = require('body-parser');
-//const { Query } = require('mongoose');
+
+
+
+//mysql//
+const mysql = require('mysql')
 var connection = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root',
-  password : '',
-  database : 'vapikey'
+    host     : '127.0.0.1',
+    user     : 'root',
+    password : '',
+    database : 'vapikey'
 });
- 
-connection.connect();
- //json.toString(req.body.keys)
+
+connection.connect()
 
  //subscribirse
 exports.subcribirse = (req, res) => { 
@@ -27,24 +29,21 @@ exports.subcribirse = (req, res) => {
 
 
 exports.pusSMG = async (req, res) =>{
-  const userList =  await selectUser("iker")
-  const body = req.body
+  const userName = req.body.name
+  const userList =  await selectUser(userName)
   console.log(userList)
   console.log(body)
-  var jsonDat = {Vpukey:body.vapidKeys.}
-  //res.status(200).send("bai")
+  var jsonDat = {vapidKeys:JSON.parse(userList[0].vapidKeys),keys:JSON.parse(userList[0].keys),endpoint:userList[0].endpoint}
+  console.log(jsonDat)
   
   webpush.setVapidDetails(
     'mailto:example@yourdomain.org',
-    'BOZkG_PQ72qYsvBJ2WUixu9CHnBTIsW8I4mFyfmfFWoBOVYBF3ZXr-nKM2tqTQQlut3XTjm_wXJlGd4efmIfV3k',
-    'qdKNwm_anntevrNRHv-T80-brOI66SX1oFOnpHUQZts'
+     jsonDat.vapidKeys.publicKey,    
+     jsonDat.vapidKeys.privateKey
   );
   const pushSubcription = {
-    endpoint: 'https://fcm.googleapis.com/fcm/send/fx3XbZxoD90:APA91bHvFL5N7uQsX64yFapHM9RdqjexSDm1P8MIBbhDgHpmFITkRfgIEAfR8wPT2ForBlQHo09YjX0QNEV7VL_7XrGvGk2ZTRWR2rOmnqG3uPkG07hF2f8FKwGXczoPvhNWxMZPluWm',
-    keys: {
-        auth: '6RITcTRKSxL9pVkTxNJXpQ',
-        p256dh: 'BP7QaD40-FccuLAOvu_2395420Bp3it9hno8Bo7CTaRz8rrDSSeY1M7uukeH2FIL-kxJc8DQfaR3pxlQX0T7SCU'
-    }
+    endpoint: jsonDat.endpoint,
+    keys:jsonDat.keys
   }
   webpush.sendNotification(pushSubcription,"your notification push").then(()=>{
     res.status(200).send("your notification push")
