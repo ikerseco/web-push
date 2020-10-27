@@ -32,21 +32,21 @@ exports.pusSMG = async (req, res) =>{
   const userName = req.body.name
   const userList =  await selectUser(userName)
   console.log(userList)
-  console.log(body)
   var jsonDat = {vapidKeys:JSON.parse(userList[0].vapidKeys),keys:JSON.parse(userList[0].keys),endpoint:userList[0].endpoint}
   console.log(jsonDat)
-  
   webpush.setVapidDetails(
     'mailto:example@yourdomain.org',
-     jsonDat.vapidKeys.publicKey,    
-     jsonDat.vapidKeys.privateKey
+    jsonDat.vapidKeys.publicKey,    
+    jsonDat.vapidKeys.privateKey
   );
   const pushSubcription = {
     endpoint: jsonDat.endpoint,
     keys:jsonDat.keys
   }
   webpush.sendNotification(pushSubcription,"your notification push").then(()=>{
-    res.status(200).send("your notification push")
+      res.status(200).send("your notification push")
+  }).catch(()=>{
+      res.status(200).send("error")
   })
 }
 
