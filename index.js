@@ -6,8 +6,8 @@ const app = express();
 const server = http.createServer(app);
 const bodyParser = require('body-parser')
 
-const fs = require('fs');
-const path = require('path')
+//const fs = require('fs');
+//const path = require('path')
 
 const router = require('./routes/routes');
 
@@ -31,7 +31,7 @@ server.listen(port, () => {
 });
 
 //serverHttp//
-
+/*
 http.createServer(function (req, res) {
     console.log(req.url)
     //Open a file on the server and return its content:
@@ -69,7 +69,7 @@ http.createServer(function (req, res) {
   })
 
 
-
+*/
 
 
    

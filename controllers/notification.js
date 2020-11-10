@@ -3,7 +3,7 @@ const { json } = require('body-parser');
 
 
 
-//mysql//
+/*//mysql//
 const mysql = require('mysql')
 var connection = mysql.createConnection({
     host     : '127.0.0.1',
@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 });
 
 connection.connect()
-
+*/
  //subscribirse
 exports.subcribirse = (req, res) => { 
     const user = req.body
@@ -69,10 +69,7 @@ exports.genVapy = (req,res) =>{
   const user = req.body.name
   const vapidKeys = webpush.generateVAPIDKeys();
   const json ={user:user,vapidKeys:JSON.stringify(vapidKeys)}
-  var query = connection.query('INSERT INTO users SET ?',json, function (error, results, fields) {
-    if (error) throw error;
-    res.status(200).send({publicKey:vapidKeys.publicKey,results:false})
-  });
+  res.status(200).send({publicKey:vapidKeys.publicKey,pribateKey:vapidKeys.privateKey})
 }
 
 const selectUser = (dat) =>{

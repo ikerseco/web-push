@@ -7,9 +7,9 @@ const administrationController = require('../controllers/administration.js')
 //const camUserController = require('../controllers/camUserControllers')
 
 //contr NOTIFICATIONS
-router.post('/subcribirse',notificatioController.subcribirse);
-router.get('/SMGpost',notificatioController.pusSMG)
-router.post('/genVapy',notificatioController.usersTrue,notificatioController.genVapy)
+///router.post('/subcribirse',notificatioController.subcribirse);
+//router.get('/SMGpost',notificatioController.pusSMG)
+router.get('/genVapy',notificatioController.genVapy)
 
 //contr WEB_ADMIN
 router.get('/Alluser',administrationController.selectuser)
