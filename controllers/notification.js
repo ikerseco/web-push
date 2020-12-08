@@ -3,31 +3,16 @@ const { json } = require('body-parser');
 
 
 
-/*//mysql//
-const mysql = require('mysql')
-var connection = mysql.createConnection({
-    host     : '127.0.0.1',
-    user     : 'root',
-    password : '',
-    database : 'vapikey'
-});
 
-connection.connect()
-*/
+
  //subscribirse
-exports.subcribirse = (req, res) => { 
-    const user = req.body
-    const userKeys =JSON.stringify(req.body.keys)
-    const json ={endpoint:req.body.endpoint,expirationTime:"null",keys:userKeys}
-    const refence = "seco"
-    var query = connection.query(`UPDATE users SET ?`,json, function (error, results, fields) {
-      if (error) throw error;
+exports.subcribirse = (req, res) => {
+      let body = req.body 
       res.status(200).send("bai")
-    });
 };
 
 
-
+/*
 exports.pusSMG = async (req, res) =>{
   const userName = req.body.name
   const userList =  await selectUser(userName)
@@ -71,13 +56,4 @@ exports.genVapy = (req,res) =>{
   const json ={user:user,vapidKeys:JSON.stringify(vapidKeys)}
   res.status(200).send({publicKey:vapidKeys.publicKey,pribateKey:vapidKeys.privateKey})
 }
-
-const selectUser = (dat) =>{
-  console.log(dat)
-  return new Promise((resolve)=>{
-    console.log(dat)
-    connection.query('SELECT * FROM `users` WHERE `user` = ?',[dat],(error,results,fields)=>{
-      resolve(results)
-    })
-  })
-}
+*/

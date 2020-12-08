@@ -1,18 +1,22 @@
 const express = require('express');
 const http = require('http')
 
-const port = process.env.PORT || 3006;
+
+//app router
+const port = process.env.PORT || 443;
 const app = express();
-const server = http.createServer(app);
 const bodyParser = require('body-parser')
-
-//const fs = require('fs');
-//const path = require('path')
-
 const router = require('./routes/routes');
 
+//http web server
+const server = http.createServer(app);
+const fs = require('fs');
+const path = require('path')
+
+//mongosee
+const mongoose = require('mongoose');
+const mongodbRoute = 'mongodb+srv://webpush:n3BFWWqqLr1UWqKs@webpush.qinwo.mongodb.net/webpush-shard-00-02?retryWrites=true&w=majority'
    
-//app.use
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
@@ -25,13 +29,9 @@ app.use(router)
 
 
 
-//smg//
-server.listen(port, () => {
-    console.log(`Servidor up en http://localhost:${port}`);
-});
 
 //serverHttp//
-/*
+
 http.createServer(function (req, res) {
     console.log(req.url)
     //Open a file on the server and return its content:
@@ -69,7 +69,23 @@ http.createServer(function (req, res) {
   })
 
 
-*/
+/*MONGODB*/
+const options = {
+  socketTimeoutMS: 0,
+  keepAlive: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true 
+};
+
+mongoose.connect(mongodbRoute, options, (err) => {
+    if (err) {
+        return console.log(`Error al conectar a la base de datos: ${err}`)
+    }
+    server.listen(port, () => {
+		  console.log(`Servidor up en ${port}`);
+	  });
+    console.log(`Conexión con Mongo correcta.`)
+})
 
 
    

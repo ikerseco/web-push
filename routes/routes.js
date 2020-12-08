@@ -1,17 +1,22 @@
 const express = require('express')
 const router = express.Router();
 
-const notificatioController = require('../controllers/notification.js')
-const administrationController = require('../controllers/administration.js')
+const mongoCtrl = require('../controllers/mongoCtrl.js')
 
-//const camUserController = require('../controllers/camUserControllers')
+//const notificatioController = require('../controllers/notification.js')
+//const administrationController = require('../controllers/administration.js')
 
-//contr NOTIFICATIONS
-///router.post('/subcribirse',notificatioController.subcribirse);
+
 //router.get('/SMGpost',notificatioController.pusSMG)
-router.get('/genVapy',notificatioController.genVapy)
+//router.get('/genVapy',notificatioController.genVapy)
 
 //contr WEB_ADMIN
-router.get('/Alluser',administrationController.selectuser)
+//router.get('/Alluser',administrationController.selectuser)
+
+//mongodb
+router.get('/init',mongoCtrl.subcribirse)
+router.post('/createUser',mongoCtrl.createUser)
+router.put('/updateUser',mongoCtrl.updateUser)
+router.delete('/deleteUser',)
 
 module.exports = router
