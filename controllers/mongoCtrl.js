@@ -1,10 +1,8 @@
 const Users = require('../models/Users')
 const webpush = require('web-push')
-//subscribirse
 
-exports.subcribirse = (req, res) => { 
-    res.status(200).send("bai")
-};
+
+
 
 
 //crear usuarios
