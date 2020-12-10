@@ -17,6 +17,10 @@ const mongoCtrl = require('../controllers/mongoCtrl.js')
 router.get('/init',mongoCtrl.subcribirse)
 router.post('/createUser',mongoCtrl.createUser)
 router.put('/updateUser',mongoCtrl.updateUser)
-router.delete('/deleteUser',)
+//router.delete('/deleteUser',mongoCtrl.deleteUser)
+
+//wepush
+router.post('/subcribirse',mongoCtrl.deleteUser,mongoCtrl.createUser) 
+
 
 module.exports = router

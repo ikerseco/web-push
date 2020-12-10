@@ -6,7 +6,10 @@ const user = new mongoose.Schema({
         urlendpoint:String,
         p256dh: String,
         auth:String,
-        tipouser:String,  
+    },
+    vapidKey: {
+        publicKey: String,
+        privateKey:String
     }
 });
 

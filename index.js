@@ -3,7 +3,7 @@ const http = require('http')
 
 
 //app router
-const port = process.env.PORT || 443;
+const port = process.env.PORT || 8000;
 const app = express();
 const bodyParser = require('body-parser')
 const router = require('./routes/routes');
@@ -74,7 +74,8 @@ const options = {
   socketTimeoutMS: 0,
   keepAlive: true,
   useNewUrlParser: true,
-  useUnifiedTopology: true 
+  useUnifiedTopology: true,
+  useFindAndModify: false
 };
 
 mongoose.connect(mongodbRoute, options, (err) => {
