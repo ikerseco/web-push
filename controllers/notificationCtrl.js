@@ -3,9 +3,25 @@ const webpush = require('web-push')
 
 
 
+
+
 exports.pusSMG = async(req,res)=>{
-  const userName = req.body.name
-  res.status(200).send(userName)
+  const userName = req.body.user
+  let user = await Users.find({user:userName}).exec()
+  webpush.setVapidDetails(
+    'mailto:example@yourdomain.org',
+    user[0].vapidKey.publicKey,
+    user[0].vapidKey.privateKey
+  )
+  const pushSubscription = {
+    endpoint: user[0].data.urlendpoint,
+    keys: {
+      auth: user[0].data.auth,
+      p256dh: user[0].data.p256dh
+    }
+  };
+  webpush.sendNotification(pushSubscription,'Your Push Payload Text')
+  res.status(200).send(user)
 }
 
 
