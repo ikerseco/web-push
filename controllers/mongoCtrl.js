@@ -53,4 +53,12 @@ exports.deleteUser = (req,res,next) =>{
     });
 }
 
+//allUser
+exports.allUsers = (req, res) => {
+    Users.find({}, (err, data) => {
+        if (err) return res.status(500).send({ message: `Error al realizar la petición: ${err}` });
+        if (!data) return res.status(404).send({ message: `No existen series` });
+        res.status(200).send(data);
+    });
+};
 

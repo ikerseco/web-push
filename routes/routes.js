@@ -12,5 +12,8 @@ router.put('/updateUser',mongoCtrl.updateUser)
 //wepush
 router.post('/sendOne',notificationCtrl.pusSMG) 
 
+//hmtlweb
+router.get('/Users',mongoCtrl.allUsers)
+
 
 module.exports = router
